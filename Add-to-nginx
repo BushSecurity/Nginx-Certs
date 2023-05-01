@@ -1,0 +1,6 @@
+Certificates are in /opt/ssl/. Move them to the /etc/nginx/ssl/ folder.
+Than add following lines:
+ssl_certificate /etc/nginx/ssl/server_chain.crt;
+ssl_certificate_key /etc/nginx/ssl/server.lab.key;
+ssl_client_certificate /etc/nginx/ssl/ca1_chain.crt;
+ssl_verify_client on;
