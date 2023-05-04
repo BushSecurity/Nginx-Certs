@@ -185,7 +185,7 @@ openssl genrsa -out priv/server.key 2048
 openssl req -config openssl.conf -key priv/server.key -new -sha256 -out csr/server.csr
 openssl ca -config openssl.conf -extensions server_cert -days 365 -notext -md sha256 -in csr/server.csr -out pub/server.crt
 cat pub/ca1.crt ../ca_root/pub/ca.crt > pub/ca1_chain.crt
-cat pub/server.crt pub/ca1_chain.crt > pub/server.crt
+cat pub/server.crt pub/ca1_chain.crt > pub/server_chain.crt
 
 
 
@@ -197,7 +197,7 @@ openssl pkcs12 -export -in pub/client1.crt -inkey priv/client1.key -certfile pub
 
 
 echo "Certificates are in /opt/ssl/. Move them to the "
-echo "ssl_certificate /etc/nginx/ssl/server_chain.crt;"
-echo "ssl_certificate_key /etc/nginx/ssl/server.lab.key;"
-echo "ssl_client_certificate /etc/nginx/ssl/ca1_chain.crt;"
+echo "ssl_certificate /opt/ssl/ca1/pub/server_chain.crt;"
+echo "ssl_certificate_key /opt/ssl/ca1/priv/server.key;"
+echo "ssl_client_certificate /opt/ssl/ca1/pub/ca1_chain.crt;"
 echo "ssl_verify_client on;"
